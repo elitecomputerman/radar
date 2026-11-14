@@ -278,7 +278,6 @@
             updateWindyMap(zone.lat, zone.lon, currentWindyOverlay);
 
             try {
-                // URL corregida y limpia para evitar errores 400 Bad Request
                 const url = `https://api.open-meteo.com/v1/forecast?latitude=${zone.lat}&longitude=${zone.lon}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,precipitation,cloudcover,surface_pressure,weathercode&timezone=America/Argentina/Buenos_Aires`;
                 const resp = await fetch(url);
                 const data = await resp.json();
@@ -415,3 +414,23 @@
                 const temp = hourly.temperature_2m[i];
                 const cloud = hourly.cloudcover ? hourly.cloudcover[i] : 0;
                 const rain = hourly.precipitation ? hourly.precipitation[i] : 0;
+
+                const card = document.createElement('div');
+                card.className = 'hourly-card';
+                card.innerHTML = `
+                    <div class="hourly-time">${hourStr}</div>
+                    <div style="font-size:1.1rem; margin: 4px 0;">${rain > 0 ? '🌧️' : (cloud > 50 ? '☁️' : '🌤️')}</div>
+                    <div class="hourly-temp">${temp} °C</div>
+                    <div style="font-size:0.7rem; color:#8b949e; margin-top:2px;">Nubes: ${cloud}%</div>
+                `;
+                container.appendChild(card);
+            }
+        }
+
+        window.onload = () => {
+            initQR();
+            fetchRealtimeWeather();
+        };
+    </script>
+</body>
+</html>
