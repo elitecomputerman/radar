@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Clima Ciudad de San Luis — Central de Monitoreo &amp; Radar Windy</title>
     <link rel="stylesheet" href="luis.css">
-    <!-- Librería ligera para generar el Código QR -->
+    <!-- Librería para generar el Código QR -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
@@ -34,7 +34,7 @@
             <button class="btn-alert-sim" id="btn-sim-alert" onclick="toggleSimulatedAlert()">⚡ Simular Alerta Severa</button>
         </div>
 
-        <!-- MENÚ LATERAL / BARRA MÓVIL (NAV) -->
+        <!-- MENÚ LATERAL (NAV) -->
         <nav class="nav">
             <a href="#inicio" class="nav-btn active">📍 Tiempo Real</a>
             <a href="#radar" class="nav-btn">🌪️ Radar Windy</a>
@@ -47,7 +47,7 @@
         <!-- CONTENIDO PRINCIPAL (MAIN) -->
         <main class="main">
             
-            <!-- SECCIÓN 1: TIEMPO REAL EN ZONAS DE LA CIUDAD DE SAN LUIS -->
+            <!-- SECCIÓN 1: TIEMPO REAL -->
             <section id="inicio" class="section">
                 <h2>Condiciones Meteorológicas en Tiempo Real — San Luis Capital</h2>
                 <div class="city-selector">
@@ -85,14 +85,14 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 2: RADAR WINDY INTERACTIVO EN VIVO -->
+            <!-- SECCIÓN 2: RADAR WINDY -->
             <section id="radar" class="section">
                 <div class="section-header-flex">
                     <h2>Radar Meteorológico Windy — Ciudad de San Luis</h2>
                     <span id="windy-layer-badge" class="radar-time-tag">Capa: Radar &amp; Rayos</span>
                 </div>
                 <p class="section-desc">
-                    Mapa meteorológico en vivo impulsado por <strong>Windy.com</strong> centrado en la Ciudad de San Luis. Toca los botones inferiores para alternar capas desde cualquier celular o tablet.
+                    Mapa meteorológico en vivo impulsado por <strong>Windy.com</strong> centrado en la Ciudad de San Luis.
                 </p>
 
                 <div class="radar-container">
@@ -115,13 +115,13 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 3: CARACTERÍSTICAS DEL CLIMA DE LA CIUDAD -->
+            <!-- SECCIÓN 3: CARACTERÍSTICAS DEL CLIMA -->
             <section id="caracteristicas" class="section">
                 <h2>Características del Clima en la Ciudad de San Luis</h2>
                 <div class="feature-grid">
                     <div class="feature-box">
                         <h4>🏙️ Clima Urbano y Pie de Sierra</h4>
-                        <p>Ubicada a 709 m s. n. m. al pie del extremo sur de las Sierras de San Luis (Quebrada de los Cóndores), presenta clima templado semiárido con marcada amplitud térmica diaria.</p>
+                        <p>Ubicada a 709 m s. n. m. al pie del extremo sur de las Sierras de San Luis, presenta clima templado semiárido con marcada amplitud térmica diaria.</p>
                     </div>
                     <div class="feature-box">
                         <h4>💨 Viento Chorrillero</h4>
@@ -146,7 +146,7 @@
 
         </main>
 
-        <!-- ASIDE: ALERTAS + GENERADOR QR MÓVIL -->
+        <!-- ASIDE: ALERTAS Y QR -->
         <aside class="aside" id="alertas">
             <h3>Monitor de Tormentas — Capital</h3>
             <div id="side-alert-content">
@@ -164,18 +164,17 @@
 
             <hr class="aside-divider">
 
-            <!-- MÓDULO QR PARA CELULARES Y TABLETS -->
             <div id="qr-acceso" class="qr-card">
                 <h4>📱 Acceso Rápido Celular / Tablet</h4>
-                <p class="qr-help">Escanea este código con la cámara de tu teléfono para abrir el monitor meteorológico en pantalla adaptativa.</p>
+                <p class="qr-help">Escanea este código con la cámara de tu teléfono para abrir el monitor meteorológico.</p>
                 
                 <div id="qrcode-box" class="qr-box"></div>
                 
                 <div class="qr-url-group">
                     <label for="qr-url-input">Enlace de tu página web:</label>
-                    <input type="text" id="qr-url-input" placeholder="https://tu-pagina-san-luis.netlify.app" oninput="regenerateQR()">
+                    <input type="text" id="qr-url-input" placeholder="https://tu-pagina.netlify.app" oninput="regenerateQR()">
                     <small id="qr-local-warning" class="qr-warning" style="display:none;">
-                        ⚠️ Estás abriendo el archivo localmente. Pega arriba tu enlace web (ej. GitHub Pages o Netlify) para que el celular pueda abrirlo desde internet.
+                        ⚠️ Estás abriendo el archivo localmente. Pega arriba tu enlace web (Netlify o GitHub Pages) para que funcione en el celular.
                     </small>
                 </div>
 
@@ -186,7 +185,7 @@
         <!-- FOOTER -->
         <footer class="footer">
             <p><strong>Clima Ciudad de San Luis — Central de Monitoreo</strong> | Telemetría: Open-Meteo API | Radar Interactivo: Windy.com</p>
-            <p style="font-size:0.8rem; color:#8b949e; margin-top:5px;">Diseño 100% Adaptativo (Móvil, Tablet &amp; Desktop) — San Luis Capital © 2026</p>
+            <p style="font-size:0.8rem; color:#8b949e; margin-top:5px;">Diseño 100% Adaptativo — San Luis Capital © 2026</p>
         </footer>
 
     </div>
@@ -205,9 +204,6 @@
         let currentWindyOverlay = 'radar';
         let qrInstance = null;
 
-        // ==========================================
-        // 1. GENERADOR DE CÓDIGO QR DINÁMICO
-        // ==========================================
         function initQR() {
             const input = document.getElementById('qr-url-input');
             const warning = document.getElementById('qr-local-warning');
@@ -217,7 +213,6 @@
                 input.value = currentUrl;
                 warning.style.display = 'none';
             } else {
-                // Si se abre como archivo local (file://), muestra aviso útil y un enlace de ejemplo editable
                 input.value = "https://clima-san-luis.netlify.app";
                 warning.style.display = 'block';
             }
@@ -259,9 +254,6 @@
             }
         }
 
-        // ==========================================
-        // 2. CONTROL DEL RADAR WINDY EN VIVO
-        // ==========================================
         function updateWindyMap(lat, lon, overlay) {
             const iframe = document.getElementById('windyIframe');
             iframe.src = `https://embed.windy.com/embed2.html?lat=${lat}&lon=${lon}&detailLat=${lat}&detailLon=${lon}&width=800&height=480&zoom=11&level=surface&overlay=${overlay}&product=${overlay}&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1`;
@@ -279,9 +271,6 @@
             updateWindyMap(zone.lat, zone.lon, currentWindyOverlay);
         }
 
-        // ==========================================
-        // 3. CLIMA EN TIEMPO REAL (OPEN-METEO)
-        // ==========================================
         async function fetchRealtimeWeather() {
             const zoneKey = document.getElementById('city-select').value;
             const zone = ZONES[zoneKey];
@@ -289,7 +278,8 @@
             updateWindyMap(zone.lat, zone.lon, currentWindyOverlay);
 
             try {
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${zone.lat}&longitude=${zone.lon}&current_weather=true&hourly=temperature_2d,relativehumidity_2d,precipitation,cloudcover,surface_pressure,weathercode&timezone=America%2FArgentina%2FBuenos_Aires`;
+                // URL corregida y limpia para evitar errores 400 Bad Request
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${zone.lat}&longitude=${zone.lon}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,precipitation,cloudcover,surface_pressure,weathercode&timezone=America/Argentina/Buenos_Aires`;
                 const resp = await fetch(url);
                 const data = await resp.json();
 
@@ -397,7 +387,7 @@
                 desc.innerText = "Núcleo convectivo intenso ingresando desde el Suroeste hacia el centro, Juana Koslay y Potrero de los Funes.";
 
                 sideAlert.innerHTML = `
-                    <div style="background:#5c0000; padding:12px; border-radius:6px; border:1px solid #ff0000; animation: blink 1s infinite;">
+                    <div style="background:#5c0000; padding:12px; border-radius:6px; border:1px solid #ff0000;">
                         <strong style="color:#ffffff;">🚨 SIMULACIÓN DE ALERTA</strong>
                         <p style="font-size:0.85rem; margin-top:6px; color:#ffcccc;">Riesgo inminente de granizo, caída de rayos y ráfagas >70 km/h en la ciudad.</p>
                     </div>`;
@@ -422,26 +412,6 @@
             for (let i = 0; i < 8; i++) {
                 const date = new Date(hourly.time[i]);
                 const hourStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                const temp = hourly.temperature_2d[i];
+                const temp = hourly.temperature_2m[i];
                 const cloud = hourly.cloudcover ? hourly.cloudcover[i] : 0;
                 const rain = hourly.precipitation ? hourly.precipitation[i] : 0;
-
-                const card = document.createElement('div');
-                card.className = 'hourly-card';
-                card.innerHTML = `
-                    <div class="hourly-time">${hourStr}</div>
-                    <div style="font-size:1.1rem; margin: 4px 0;">${rain > 0 ? '🌧️' : (cloud > 50 ? '☁️' : '🌤️')}</div>
-                    <div class="hourly-temp">${temp} °C</div>
-                    <div style="font-size:0.7rem; color:#8b949e; margin-top:2px;">Nubes: ${cloud}%</div>
-                `;
-                container.appendChild(card);
-            }
-        }
-
-        window.onload = () => {
-            initQR();
-            fetchRealtimeWeather();
-        };
-    </script>
-</body>
-</html>
