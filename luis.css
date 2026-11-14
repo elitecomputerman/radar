@@ -1,0 +1,664 @@
+/* RESET Y AJUSTES BASE RESPONSIVE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* ESTRUCTURA GENERAL CON CSS GRID (ESCRITORIO > 1024px) */
+.dashboard-container {
+    display: grid;
+    grid-template-areas: 
+        "header header header"
+        "alert alert alert"
+        "nav main aside"
+        "footer footer footer";
+    grid-template-columns: 210px 1fr 290px;
+    grid-template-rows: auto auto 1fr auto;
+    min-height: 100vh;
+    gap: 15px;
+    padding: 15px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+    grid-area: header;
+    background: #161b22;
+    border-bottom: 2px solid #1abc9c;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.header-title h1 {
+    font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+    color: #ffffff;
+}
+
+.header-title p {
+    font-size: clamp(0.78rem, 1.5vw, 0.88rem);
+    color: #8b949e;
+}
+
+.live-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #21262d;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #2ecee8;
+    border: 1px solid #30363d;
+    white-space: nowrap;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff66;
+    animation: blink 1.5s infinite;
+}
+
+/* BANNER DE ALERTAS */
+.alert-banner {
+    grid-area: alert;
+    background: #1f242d;
+    border: 1px solid #30363d;
+    border-left: 5px solid #1abc9c;
+    border-radius: 8px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.alert-banner.severe-danger {
+    background: #3a0d11;
+    border-color: #ff4444;
+    border-left: 5px solid #ff0000;
+}
+
+.alert-icon {
+    font-size: 1.7rem;
+    flex-shrink: 0;
+}
+
+.alert-info {
+    flex-grow: 1;
+}
+
+.alert-info h3 {
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    color: #ffffff;
+}
+
+.alert-info p {
+    font-size: 0.84rem;
+    color: #8b949e;
+}
+
+.btn-alert-sim {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-alert-sim:hover {
+    background: #cc0000;
+}
+
+/* NAV (MENÚ LATERAL EN PC / BARRA DESLIZANTE EN MÓVIL Y TABLET) */
+.nav {
+    grid-area: nav;
+    background: #161b22;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid #30363d;
+    height: fit-content;
+    position: sticky;
+    top: 15px;
+}
+
+.nav-btn {
+    color: #58a6ff;
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    background: #21262d;
+    display: block;
+}
+
+.nav-btn:hover, .nav-btn.active {
+    background: #1abc9c;
+    color: #ffffff;
+}
+
+/* MAIN */
+.main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 0; /* Evita desbordamiento en Grid */
+}
+
+.section {
+    background: #161b22;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+}
+
+.section h2 {
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    color: #ffffff;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 8px;
+}
+
+.section-desc {
+    font-size: 0.86rem;
+    color: #8b949e;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.section-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.section-header-flex h2 {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.radar-time-tag {
+    background: #21262d;
+    color: #1abc9c;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    border: 1px solid #30363d;
+}
+
+/* SELECTOR Y TARJETAS DE CLIMA */
+.city-selector {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.city-selector label {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.city-selector select {
+    background: #21262d;
+    color: white;
+    border: 1px solid #30363d;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 420px;
+}
+
+.weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.metric-card {
+    background: #21262d;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+}
+
+.metric-title {
+    font-size: 0.78rem;
+    color: #8b949e;
+}
+
+.metric-value {
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    font-weight: bold;
+    color: #58a6ff;
+    margin: 5px 0;
+}
+
+.metric-sub {
+    font-size: 0.75rem;
+    color: #8b949e;
+}
+
+/* CONTENEDOR DE RADAR WINDY */
+.radar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.windy-wrapper {
+    width: 100%;
+    height: 460px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #30363d;
+    background: #0d1117;
+}
+
+.windy-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.radar-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    background: #21262d;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-ctrl {
+    background: #30363d;
+    color: #c9d1d9;
+    border: 1px solid transparent;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: all 0.2s;
+    flex: 1 1 auto;
+    text-align: center;
+    min-width: 110px;
+}
+
+.btn-ctrl:hover {
+    background: #484f58;
+    color: #ffffff;
+}
+
+.btn-ctrl.active-layer {
+    background: #1abc9c;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* SECCIÓN CARACTERÍSTICAS DEL CLIMA */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.feature-box {
+    background: #21262d;
+    padding: 14px;
+    border-radius: 8px;
+    border-left: 3px solid #1abc9c;
+}
+
+.feature-box h4 {
+    color: #ffffff;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.feature-box p {
+    font-size: 0.82rem;
+    color: #8b949e;
+    line-height: 1.45;
+}
+
+/* PRONÓSTICO HORARIO */
+.hourly-flex {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.hourly-card {
+    background: #21262d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 88px;
+    flex-shrink: 0;
+    border: 1px solid #30363d;
+}
+
+.hourly-time {
+    font-size: 0.75rem;
+    color: #8b949e;
+}
+
+.hourly-temp {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* ASIDE & TARJETA QR */
+.aside {
+    grid-area: aside;
+    background: #161b22;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    height: fit-content;
+}
+
+.aside h3 {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.aside-divider {
+    border: none;
+    border-top: 1px solid #30363d;
+    margin: 15px 0;
+}
+
+.aside-subtitle {
+    color: #58a6ff;
+    font-size: 0.92rem;
+    margin-bottom: 8px;
+}
+
+.storm-indicator-box {
+    background: #21262d;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.84rem;
+}
+
+.ind-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* TARJETA CÓDIGO QR */
+.qr-card {
+    background: #21262d;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #1abc9c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.qr-card h4 {
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.qr-help {
+    font-size: 0.78rem;
+    color: #8b949e;
+    line-height: 1.35;
+}
+
+.qr-box {
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.qr-box img, .qr-box canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.qr-url-group {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.qr-url-group label {
+    font-size: 0.75rem;
+    color: #8b949e;
+}
+
+.qr-url-group input {
+    width: 100%;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: #58a6ff;
+    padding: 7px 9px;
+    border-radius: 5px;
+    font-size: 0.78rem;
+}
+
+.qr-warning {
+    font-size: 0.72rem;
+    color: #f0883e;
+    line-height: 1.3;
+    margin-top: 2px;
+}
+
+.btn-qr-download {
+    width: 100%;
+    background: #1abc9c;
+    color: #ffffff;
+    border: none;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-qr-download:hover {
+    background: #16a085;
+}
+
+/* FOOTER */
+.footer {
+    grid-area: footer;
+    background: #161b22;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    border-top: 1px solid #30363d;
+    font-size: 0.84rem;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* =========================================================
+   ADAPTACIÓN PARA TABLETS (ENTRE 769px Y 1024px)
+   ========================================================= */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        grid-template-areas: 
+            "header header"
+            "alert alert"
+            "nav nav"
+            "main aside"
+            "footer footer";
+        grid-template-columns: 1fr 270px;
+    }
+
+    .nav {
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        position: static;
+        padding: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-btn {
+        flex-shrink: 0;
+    }
+
+    .windy-wrapper {
+        height: 420px;
+    }
+}
+
+/* =========================================================
+   ADAPTACIÓN PARA CELULARES Y TABLETS VERTICALES (<= 768px)
+   ========================================================= */
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-areas: 
+            "header"
+            "alert"
+            "nav"
+            "main"
+            "aside"
+            "footer";
+        grid-template-columns: 1fr;
+        padding: 10px;
+        gap: 12px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 15px;
+    }
+
+    .alert-banner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 15px;
+    }
+
+    .btn-alert-sim {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav {
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-radius: 6px;
+        padding: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-btn {
+        font-size: 0.82rem;
+        padding: 8px 11px;
+    }
+
+    .section {
+        padding: 14px;
+    }
+
+    .weather-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .windy-wrapper {
+        height: 360px;
+    }
+
+    .btn-ctrl {
+        font-size: 0.78rem;
+        padding: 8px 8px;
+        min-width: 95px;
+    }
+}
+
+/* =========================================================
+   CELULARES PEQUEÑOS (<= 400px)
+   ========================================================= */
+@media (max-width: 400px) {
+    .weather-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .windy-wrapper {
+        height: 310px;
+    }
+}
